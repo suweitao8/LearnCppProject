@@ -25,8 +25,7 @@ public class LearnPlugin : ModuleRules
 		PublicDependencyModuleNames.AddRange(
 			new string[]
 			{
-				"Core",
-				// ... add other public dependencies that you statically link with here ...
+				"Core", "Blutility",
 			}
 			);
 			
@@ -38,7 +37,37 @@ public class LearnPlugin : ModuleRules
 				"Engine",
 				"Slate",
 				"SlateCore",
-				// ... add private dependencies that you statically link with here ...	
+				"AutomationController",
+				"Core",
+				"CoreUObject",
+				"Engine",
+				"InputCore",
+				"Slate",
+				"SlateCore",
+				"EditorFramework",
+				"UnrealEd",
+				"Kismet",
+				"AssetDefinition",
+				"AssetRegistry",
+				"AssetTools",
+				"WorkspaceMenuStructure",
+				"ContentBrowser",
+				"ContentBrowserData",
+				"ClassViewer",
+				"CollectionManager",
+				"PropertyEditor",
+				"BlueprintGraph",
+				"Json",
+				"JsonUtilities",
+				"UMG",
+				"UMGEditor",
+				"KismetCompiler",
+				"ToolMenus",
+				"RHI",
+				"RenderCore",
+				"ImageWrapper",
+				"ImageWriteQueue",
+				"DeveloperSettings",
 			}
 			);
 		
