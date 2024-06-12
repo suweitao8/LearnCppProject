@@ -2,17 +2,46 @@
 
 #include "LearnPlugin.h"
 
+#include "LevelEditor.h"
+#include "MyCommands.h"
+
 #define LOCTEXT_NAMESPACE "FLearnPluginModule"
 
 void FLearnPluginModule::StartupModule()
 {
-	// This code will execute after your module is loaded into memory; the exact timing is specified in the .uplugin file per-module
+	// 样式
+	FMyStyle::Initialize();
+	FMyStyle::ReloadTextures();
+
+	// 注册命令
+	FMyCommands::Register();
+
+	// 创建 FUICommandList
+	PluginCommands = MakeShareable(new FUICommandList);
+	
+	PluginCommands->MapAction(
+		FMyCommands::Get().PluginAction,
+		FExecuteAction::CreateRaw(this, &FLearnPluginModule::PluginButtonClicked),
+		FCanExecuteAction());
+	
+	FLevelEditorModule& LevelEditorModule = FModuleManager::LoadModuleChecked<FLevelEditorModule>(TEXT("LevelEditor"));
+	
+	TSharedRef<FUICommandList> ExistingLevelCommands = LevelEditorModule.GetGlobalLevelEditorActions();
+	ExistingLevelCommands->Append(PluginCommands.ToSharedRef());
 }
 
 void FLearnPluginModule::ShutdownModule()
 {
-	// This function may be called during shutdown to clean up your module.  For modules that support dynamic reloading,
-	// we call this function before unloading the module.
+	FMyCommands::Unregister();
+
+	FMyStyle::Shutdown();
+}
+
+void FLearnPluginModule::PluginButtonClicked()
+{
+	// 快捷键的功能
+	UE_LOG(LogTemp, Log, TEXT("PluginButtonClicked"));
+	FUnrealEdMisc::Get().RestartEditor(true);
 }
 
 #undef LOCTEXT_NAMESPACE

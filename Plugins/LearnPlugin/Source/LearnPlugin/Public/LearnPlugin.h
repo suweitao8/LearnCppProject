@@ -12,4 +12,10 @@ public:
 	/** IModuleInterface implementation */
 	virtual void StartupModule() override;
 	virtual void ShutdownModule() override;
+
+	void PluginButtonClicked();
+
+public:
+	// 垃圾回收机制回收掉
+	TSharedPtr<class FUICommandList> PluginCommands;
 };

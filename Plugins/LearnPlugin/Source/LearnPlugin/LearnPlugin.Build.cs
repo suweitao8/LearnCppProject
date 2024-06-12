@@ -25,7 +25,7 @@ public class LearnPlugin : ModuleRules
 		PublicDependencyModuleNames.AddRange(
 			new string[]
 			{
-				"Core", "Blutility",
+				"Core", "Blutility", "Projects"
 			}
 			);
 			
